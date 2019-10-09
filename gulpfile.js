@@ -5,6 +5,7 @@ var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var minifycss = require('gulp-minify-css');
 var combine = require('gulp-scss-combine');
 
 gulp.task('sass', function() {
@@ -12,11 +13,15 @@ gulp.task('sass', function() {
             'src/scss/*.scss'
         ])
         .pipe(sass())
-        .pipe(combine())
-        .pipe(concat('all.css'))
-        .pipe(cleanCSS())
         .pipe(gulp.dest('dist/css'))
         .pipe(browserSync.stream());
+});
+
+gulp.task('minify-css', function() {
+    gulp.src('dist/css/*.css')
+        .pipe(concat('styles.css'))
+        .pipe(minifycss())
+        .pipe(gulp.dest('dist/css'))
 });
 
 gulp.task('js', function() {
@@ -51,4 +56,4 @@ gulp.watch(['src/scss/*.scss'], ['sass']);
 gulp.watch(['src/js/*.js'], ['js']);
 gulp.watch('dist/*.html').on('change', browserSync.reload);
 
-gulp.task('default', ['sass', 'js', 'serve']);
+gulp.task('default', ['sass', 'minify-css', 'js', 'serve']);
