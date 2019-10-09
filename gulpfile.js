@@ -1,12 +1,10 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
-var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var minifycss = require('gulp-minify-css');
-var combine = require('gulp-scss-combine');
 
 gulp.task('sass', function() {
     return gulp.src([
@@ -19,7 +17,7 @@ gulp.task('sass', function() {
 
 gulp.task('minify-css', function() {
     gulp.src('dist/css/*.css')
-        .pipe(concat('styles.css'))
+        .pipe(concat('all.css'))
         .pipe(minifycss())
         .pipe(gulp.dest('dist/css'))
 });
