@@ -16,7 +16,17 @@ gulp.task('sass', function() {
 });
 
 gulp.task('minify-css', function() {
-    gulp.src('dist/css/*.css')
+    gulp.src([
+            'dist/css/bootstrap.min.css',
+            'dist/css/font-awesome.css',
+            'dist/css/font-awesome.min.css',
+            'dist/css/jquery.fancybox.css',
+            'dist/css/owl.carousel.css',
+            'dist/css/owl.transition.css',
+            'dist/css/responsive.css',
+            'dist/css/styles.css',
+            'dist/css/stylesheet.css',
+        ])
         .pipe(concat('all.css'))
         .pipe(minifycss())
         .pipe(gulp.dest('dist/css'))
@@ -24,17 +34,17 @@ gulp.task('minify-css', function() {
 
 gulp.task('js', function() {
     return gulp.src([
-            'src/js/bootstrap.min.js',
-            'src/js/common.js',
-            'src/js/DioProgress.js',
-            'src/js/global.js',
-            'src/js/jquery-2.1.1.min.js',
             'src/js/jquery-2.1.3.min.js',
             'src/js/jquery.fancybox.js',
             'src/js/jquery.parallax.js',
+            'src/js/bootstrap.min.js',
             'src/js/jstree.min.js',
+            'src/js/template.js',
+            'src/js/common.js',
+            'src/js/global.js',
             'src/js/owl.carousel.min.js',
-            'src/js/template.js'
+            'src/js/DioProgress.js'
+
         ])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js'))
